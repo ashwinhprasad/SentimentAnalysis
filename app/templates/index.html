@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+    {% block body %}
+        <div class="col" > 
+            <div class="row">
+                <div class="col">
+                    <form class="clf-form" method="POST">
+                        <h1 style="text-align: center;" >Movie Sentiment Analysis</h1>
+                        <div class='input-container' >
+                            {% if response %}
+                            <label>Probability that the user liked the movie: </label>
+                            <div class="progress">
+                                <div class="progress-bar bg-success" role="progressbar" style="width: {{ response }}%" aria-valuenow="{{response}}" aria-valuemin="0" aria-valuemax="100">{{response}}%</div>
+                            </div>
+                            {% endif %}
+                            <label for="classifier" >Choose Classifier: </label>
+                            <select id="classifier" name="clf" > 
+                                <option value="RFC">Random Forest Classifier</option>
+                                <option value="NBC">Naive Bayes Classifier</option>
+                                <option value="ens">Ensemble Model</option>
+                            </select>
+                            <label for="review" >Enter Review: </label>
+                            <textarea name="review" id="review" rows=6 cols=40></textarea>
+                            <button class="btn btn-primary" >Submit</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col about">
+                    <h2 style="text-align: center;" >About</h2>
+                    <div class="row">
+                        <h3>Random Forest Classifier</h3>
+                        <p>
+                            Random Forest Classifier builds multiple decision trees
+                            where each node of the tree asks a certain question or uses
+                            a certain criteria to decide which path the input value travels to
+                            and finally reaches the end node. The question and where it is asked
+                            is decided by the Gini index criterion. Once, multiple trees have been
+                            built, The algorithm uses the voting system to predict the final answer
+                        </p>
+                    </div>
+    
+                    <div class="row">
+                        <h3>Naive Bayes</h3>
+                        <p>
+                            The Naive Bayes Algorithm works on the principle of Bayes theorem form
+                            probability. It Calculates the probability of Y given X based on the
+                            probability of getting a Y class and Probability of getting the given X
+                            given the Y class.
+                        </p>
+                    </div>
+    
+                    <div class="row">
+                        <h3>Ensemble Stacking</h3>
+                        <p>
+                            We have used 2 different models for this task. each classifier may have it's
+                            own disadvantages. Stacking is basically using both the models to predict the 
+                            probability the user like a certain movie and then using either averaging mechanism
+                            or voting mechanism to complement for other's disadvantages.
+                        </p>
+                    </div>
+    
+                </div>
+            </div>
+            <div class="row disadvantages">
+                <h2 style="text-align: center;" >Possible disadvantages of this type of modelling</h2>
+                <ul>
+                    <li>The Meaning behind the sequence of the data might be missed</li>
+                    <li>
+                        The training dataset is relatively smaller compared to many
+                        real life datasets and the words that are not in the dataset are not
+                        considered while performing classification
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+    {% endblock %}
